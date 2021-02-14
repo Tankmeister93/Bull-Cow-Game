@@ -87,7 +87,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     //Show the player bulls and cows
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
-bool UBullCowCartridge::IsIsogram(FString Word)
+bool UBullCowCartridge::IsIsogram(FString Word) const
 {
     // For each Letter.
     // Start at element[0].
