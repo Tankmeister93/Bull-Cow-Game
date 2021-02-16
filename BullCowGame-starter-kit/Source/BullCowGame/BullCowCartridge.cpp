@@ -40,8 +40,6 @@ void UBullCowCartridge::GameStart()
 
     //const TCHAR HW[] = TEXT("Life");
     //PrintLine(TEXT("Character 1 of the hidden word is: %c"), HiddenWord[0]);
-
-    IsIsogram(HiddenWord);
 }
 void UBullCowCartridge::EndGame()
 {
@@ -91,11 +89,22 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
 }
 bool UBullCowCartridge::IsIsogram(FString Word) const
 {
+    //Declare and Initialize integers here
+    //int32 Index = 0;
+    //int32 Comparison = Index + 1;
+
     for (int32 Index = 0; Index < Word.Len(); Index++)
     {
-        PrintLine(TEXT("%c"), Word[Index]);
+        for (int32 Comparison = Index + 1; Comparison < Word.Len(); Comparison++)
+        {
+            if (Word[Index] == Word[Comparison])
+            {
+                return false;
+            }
+        }
     }
-    
+    return true;
+        
     // For each Letter.
     // Start at element[0].
     // Compare against the next letter.
