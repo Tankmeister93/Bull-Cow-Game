@@ -12,22 +12,6 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 
     PrintLine(TEXT("The number of possible words is %i."), Words.Num());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
-
-    TArray<FString> ValidWords;
-
-    for (int32 Index = 0; Index < 10; Index++) //If you loop through multiple times and you use !=, it will cause problems
-    {
-        if (Words[Index].Len() >= 4 && Words[Index].Len() <= 8)
-        {
-            ValidWords.Emplace(Words[Index]);
-            //PrintLine(TEXT("%s"), *Words[Index]); //* is used to dereference a value
-        }
-    }
-    for (int32 Index = 0; Index < ValidWords.Num(); Index++)
-    {
-        PrintLine(TEXT("%s."), *ValidWords[Index]);
-    }
-    
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
@@ -119,3 +103,22 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     }
     return true;
 }
+
+TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
+{
+    TArray<FString> ValidWords;
+
+    for (int32 Index = 0; Index < Words.Num(); Index++) //If you loop through multiple times and you use !=, it will cause problems
+    {
+        if (Words[Index].Len() >= 4 && Words[Index].Len() <= 8)
+        {
+            ValidWords.Emplace(Words[Index]);
+            
+        }
+    }
+    return ValidWords
+}
+//     for (int32 Index = 0; Index < ValidWords.Num(); Index++)
+//     {
+//         PrintLine(TEXT("%s."), *ValidWords[Index]);
+//     }
