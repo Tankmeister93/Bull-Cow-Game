@@ -6,11 +6,12 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     //Welcoming the player
     Super::BeginPlay();
-
+    
     GameStart();
     //EndGame();
 
-    PrintLine(TEXT("The number of possible words is %i."), Words.Num());
+    PrintLine(TEXT("The number of possible words is: %i."), Words.Num());
+    PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 }
 
@@ -116,7 +117,7 @@ TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
             
         }
     }
-    return ValidWords
+    return ValidWords;
 }
 //     for (int32 Index = 0; Index < ValidWords.Num(); Index++)
 //     {
