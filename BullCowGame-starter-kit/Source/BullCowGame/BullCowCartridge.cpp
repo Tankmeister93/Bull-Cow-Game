@@ -13,6 +13,8 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("The number of possible words is %i."), Words.Num());
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 
+    TArray<FString> ValidWords;
+
     for (int32 Index = 0; Index < 10; Index++) //If you loop through multiple times and you use !=, it will cause problems
     {
         if (Words[Index].Len() >= 4 && Words[Index].Len() <= 8)
