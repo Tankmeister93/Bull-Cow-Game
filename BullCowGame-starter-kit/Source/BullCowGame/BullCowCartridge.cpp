@@ -19,9 +19,15 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     {
         if (Words[Index].Len() >= 4 && Words[Index].Len() <= 8)
         {
-            PrintLine(TEXT("%s"), *Words[Index]); //* is used to dereference a value
+            ValidWords.Emplace(Words[Index]);
+            //PrintLine(TEXT("%s"), *Words[Index]); //* is used to dereference a value
         }
     }
+    for (int32 Index = 0; Index < ValidWords.Num(); Index++)
+    {
+        PrintLine(TEXT("%s."), *ValidWords[Index]);
+    }
+    
 }
 
 void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
