@@ -46,7 +46,7 @@ void UBullCowCartridge::EndGame()
     PrintLine(TEXT("\nPress enter to play again."));
 }
 
-void UBullCowCartridge::ProcessGuess(FString Guess)
+void UBullCowCartridge::ProcessGuess(const FString& Guess)
 {
     if (Guess == HiddenWord)
     {
@@ -86,7 +86,7 @@ void UBullCowCartridge::ProcessGuess(FString Guess)
     //Show the player bulls and cows
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
-bool UBullCowCartridge::IsIsogram(FString Word) const
+bool UBullCowCartridge::IsIsogram(const FString& Word) const
 {
     //Declare and Initialize integers here
     //int32 Index = 0;
@@ -105,7 +105,7 @@ bool UBullCowCartridge::IsIsogram(FString Word) const
     return true;
 }
 
-TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
+TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList) const
 {
     TArray<FString> ValidWords;
 
