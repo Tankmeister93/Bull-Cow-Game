@@ -1,12 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 #include "BullCowCartridge.h"
 #include "HiddenWordList.h"
+//#include "Math/UnrealMathUtility.h"
 
 void UBullCowCartridge::BeginPlay() // When the game starts
 {
     //Welcoming the player
     Super::BeginPlay();
     
+    PrintLine(TEXT("%i"), FMath::RandRange(0, 10));
+
     GameStart();
     //EndGame();
 
@@ -32,7 +35,7 @@ void UBullCowCartridge::GameStart()
 {
     PrintLine(TEXT("Welcome to Bull Cows game!"));
 
-    HiddenWord = TEXT("Life");
+    HiddenWord = GetValidWords(Words)[0];
     Lives = HiddenWord.Len(); //Setting the lives to word length
     bGameOver = false;
 
