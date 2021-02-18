@@ -35,7 +35,7 @@ void UBullCowCartridge::GameStart()
 {
     PrintLine(TEXT("Welcome to Bull Cows game!"));
 
-    HiddenWord = GetValidWords(Words)[0];
+    HiddenWord = GetValidWords(Words)[FMath::RandRange(0, GetValidWords(Words).Num() -1)];
     Lives = HiddenWord.Len(); //Setting the lives to word length
     bGameOver = false;
 
