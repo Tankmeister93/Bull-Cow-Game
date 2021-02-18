@@ -7,15 +7,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
 {
     //Welcoming the player
     Super::BeginPlay();
-    
-    PrintLine(TEXT("%i"), FMath::RandRange(0, 10));
-
     GameStart();
-    //EndGame();
-
-    PrintLine(TEXT("The number of possible words is: %i."), Words.Num());
-    PrintLine(TEXT("The number of valid words is: %i."), GetValidWords(Words).Num());
-    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 }
 
 void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player hits enter
@@ -42,6 +34,7 @@ void UBullCowCartridge::GameStart()
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
     PrintLine(TEXT("You have %i lives."), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue...")); //Prompt player for guess
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 }
 void UBullCowCartridge::EndGame()
 {
