@@ -15,7 +15,7 @@ void UBullCowCartridge::BeginPlay() // When the game starts
     PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 }
 
-void UBullCowCartridge::OnInput(const FString& Input) // When the player hits enter
+void UBullCowCartridge::OnInput(const FString& PlayerInput) // When the player hits enter
 {
     if (bGameOver)
     {
@@ -24,7 +24,7 @@ void UBullCowCartridge::OnInput(const FString& Input) // When the player hits en
     }
     else //check PlayerGuess
     {
-        ProcessGuess(Input);       
+        ProcessGuess(PlayerInput);
     }
 }
 
@@ -109,11 +109,11 @@ TArray<FString> UBullCowCartridge::GetValidWords(TArray<FString> WordList) const
 {
     TArray<FString> ValidWords;
 
-    for (int32 Index = 0; Index < WordList.Num(); Index++) //If you loop through multiple times and you use !=, it will cause problems
+    for (FString Word: WordList)
     {
-        if (WordList[Index].Len() >= 4 && WordList[Index].Len() <= 8 && IsIsogram(WordList[Index]))
+        if (Word.Len() >= 4 && Word.Len() <= 8 && IsIsogram(Word))
         {
-            ValidWords.Emplace(WordList[Index]);   
+            ValidWords.Emplace(Word);   
         }
     }
     return ValidWords;
