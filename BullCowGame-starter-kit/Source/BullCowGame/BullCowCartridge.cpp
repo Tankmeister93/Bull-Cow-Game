@@ -35,9 +35,9 @@ void UBullCowCartridge::GameStart()
     bGameOver = false;
 
     PrintLine(TEXT("Guess the %i letter word!"), HiddenWord.Len());
+    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
     PrintLine(TEXT("You have %i lives."), Lives);
     PrintLine(TEXT("Type in your guess and \npress enter to continue...")); //Prompt player for guess
-    PrintLine(TEXT("The HiddenWord is: %s"), *HiddenWord); //This is a debug line
 }
 void UBullCowCartridge::EndGame()
 {
@@ -83,6 +83,9 @@ void UBullCowCartridge::ProcessGuess(const FString& Guess)
         }
 
     //Show the player bulls and cows
+    int32 Bulls, Cows;//declaring variables
+    GetBullCows(Guess, Bulls, Cows);//declaring two variables, but not initializing, and then immediantly using them in a function. This is a sign of out parameters
+    PrintLine(TEXT("You have %i bulls and %i cows"), Bulls, Cows);
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
 bool UBullCowCartridge::IsIsogram(const FString& Word) const
@@ -116,4 +119,27 @@ TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList
         }
     }
     return ValidWords;
+}
+void UBullCowCartridge::GetBullCows(const FString& Guess, int32& BullCount, int32& CowCount) const
+{
+    BullCount = 0;
+    CowCount = 0;
+
+    //for every index Guess is same as index Hidden, BullCount++
+    //if not a bull was it a cow? if yes CowCount++
+    for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
+    {
+        if (Guess[GuessIndex] == HiddenWord[GuessIndex])
+        {
+            BullCount++;
+            continue;
+        }
+        for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); HiddenIndex++)
+        {
+            if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
+            {
+                CowCount++;
+            }            
+        }
+    }
 }
