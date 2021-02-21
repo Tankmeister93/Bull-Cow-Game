@@ -83,9 +83,8 @@ void UBullCowCartridge::ProcessGuess(const FString& Guess)
         }
 
     //Show the player bulls and cows
-    int32 Bulls, Cows;//declaring variables
-    GetBullCows(Guess, Bulls, Cows);//declaring two variables, but not initializing, and then immediantly using them in a function. This is a sign of out parameters
-    PrintLine(TEXT("You have %i bulls and %i cows"), Bulls, Cows);
+    FBullCowCount Score = GetBullCows(Guess);//declaring two variables, but not initializing, and then immediantly using them in a function. This is a sign of out parameters
+    PrintLine(TEXT("You have %i bulls and %i cows"), Score.Bulls, Score.Cows);
     PrintLine(TEXT("Guess again, you have %i lives left"), Lives);
 }
 bool UBullCowCartridge::IsIsogram(const FString& Word) const
@@ -120,27 +119,25 @@ TArray<FString> UBullCowCartridge::GetValidWords(const TArray<FString>& WordList
     }
     return ValidWords;
 }
-void UBullCowCartridge::GetBullCows(const FString& Guess, int32& BullCount, int32& CowCount) const
+FBullCowCount UBullCowCartridge::GetBullCows(const FString& Guess) const
 {
-    BullCount = 0;
-    CowCount = 0;
+    FBullCowCount Count;//instantiating our struct, setting bulls and cows to zero
 
-    //for every index Guess is same as index Hidden, BullCount++
-    //if not a bull was it a cow? if yes CowCount++
     for (int32 GuessIndex = 0; GuessIndex < Guess.Len(); GuessIndex++)
     {
         if (Guess[GuessIndex] == HiddenWord[GuessIndex])
         {
-            BullCount++;
+            Count.Bulls++;
             continue;
         }
         for (int32 HiddenIndex = 0; HiddenIndex < HiddenWord.Len(); HiddenIndex++)
         {
             if (Guess[GuessIndex] == HiddenWord[HiddenIndex])
             {
-                CowCount++;
+                Count.Cows++;
                 break;//used to break out of the for loop
             }            
         }
     }
+    return Count;
 }
